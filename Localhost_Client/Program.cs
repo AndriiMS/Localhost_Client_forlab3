@@ -21,9 +21,9 @@ class Client
         Console.WriteLine("Клієнт підключається до сервера...");
 
         // Завантаження клієнтського сертифіката
-        var clientCertificate = new X509Certificate2("Certificates/client_certificate.pfx", "Laba3", X509KeyStorageFlags.MachineKeySet);
+        var clientCertificate = new X509Certificate2("Certificates/ClientCertificate.pfx", "BestPassword", X509KeyStorageFlags.MachineKeySet);
 
-        using var client = new TcpClient("127.0.0.1", 50001);
+        using var client = new TcpClient("127.0.0.1", 5000);
         using var sslStream = new SslStream(client.GetStream(), false, ValidateServerCertificate);
 
         sslStream.AuthenticateAsClient("ELK", new X509CertificateCollection { clientCertificate }, System.Security.Authentication.SslProtocols.Tls13, false);
